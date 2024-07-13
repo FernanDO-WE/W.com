@@ -667,6 +667,40 @@ body.dark-theme {
     margin: 4.5rem 0 2.5rem;
   }
 }
+.nav-logo,
+.nav__toggle,
+.nav__close{
+  color: var(--title-color);
+}
+.nav__toggle{
+  display: flex;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+.nav__link i,
+  .nav__toggle,
+  .nav__close{
+    display: none;
+  }
+ .nav__close{
+  position: absolute;
+  right: 1.5rem;
+  bottom: .7rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.nav-menu{
+    padding-bottom: 4rem;
+  }
+  .nav-logo{
+  font-family: var(--title-font);
+  font-weight: var(--font-medium);
+}
+.nav__buttons{
+ display: flex; 
+ align-items: center;
+ column-gap: 1.5rem;
+}
 
 /* DEV CARD CSS */
 /* RESPONSIVE */

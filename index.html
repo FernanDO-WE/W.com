@@ -557,8 +557,280 @@
         </div>
       </div>
     </section>
-  </main>
+            </main-->
+<script>
+        /**Navigation responsive function */
 
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  };
+  
+  function myFunctions() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav1") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav1";
+    }
+  };
+  
+  function myButton() {
+    var x = document.getElementById("myMenu");
+    if (x.className === "icon1") {
+      x.className += " responsive";
+    } else {
+      x.className = "icon1";
+    }
+  };
+  
+
+  
+/**Script that creates hte white background for nav */
+$(window).scroll(function() {
+    if ($(document).scrollTop() > 50) {
+      $('nav').addClass('transparent');
+    } else {
+      $('nav').removeClass('transparent');
+    }
+  }
+  );
+  /**Script that creates hte white background for nav bar background color */
+   $(window).scroll(function() {
+    if ($(document).scrollTop() > 50) {
+      $('a').addClass('fill');
+    } else {
+      $('a').removeClass('fill');
+    }
+  }
+  );
+  
+
+  
+  
+  /*Script that gives motion to different elements when scrolled to*/
+  function reveal() {
+    var reveals = document.querySelectorAll(".reveal");
+  
+    for (var i = 0; i < reveals.length; i++) {
+      var windowHeight = window.innerHeight;
+      var elementTop = reveals[i].getBoundingClientRect().top;
+      var elementVisible = 70;
+  
+      if (elementTop < windowHeight - elementVisible) {
+        reveals[i].classList.add("active");
+      } else {
+        reveals[i].classList.remove("active");
+      }
+    }
+  }
+  
+  window.addEventListener("scroll", reveal);
+  
+  
+  
+  // Initialize and add the map
+  function initMap() {
+  // The location of Uluru
+  const uluru = { lat: 39.061321, lng: -76.850639 };
+  // The map, centered at Uluru
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 14,
+    center: uluru,
+  });
+  // The marker, positioned at Uluru
+  const marker = new google.maps.Marker({
+    position: uluru,
+    map: map,
+  });
+  }
+  
+  window.initMap = initMap;
+  
+
+// Carousel images
+let slideIndex = 0;
+const slidesContainer = document.querySelector('.slides');
+const slides = document.getElementsByClassName('slide');
+const indicators = document.getElementsByClassName('indicator');
+
+function showSlide(index) {
+  // Calculate the translateX value based on the index
+  const translateXValue = -index * slides[0].offsetWidth;
+  
+  // Apply the transformation to the slides container
+  slidesContainer.style.transform = `translateX(${translateXValue}px)`;
+
+  // Remove active class from all indicators
+  for (let i = 0; i < indicators.length; i++) {
+    indicators[i].classList.remove('active');
+  }
+
+  // Set the corresponding indicator as active
+  indicators[index].classList.add('active');
+}
+
+function changeSlide(index) {
+  slideIndex = index;
+  showSlide(slideIndex);
+}
+
+function nextSlide() {
+  slideIndex++;
+  if (slideIndex === slides.length) {
+    slideIndex = 0;
+  }
+  showSlide(slideIndex);
+}
+
+// Show the initial slide
+showSlide(slideIndex);
+
+// Automatically change slide every 3 seconds
+setInterval(nextSlide, 3000);
+
+
+
+//This is the script for the slideshow on the homepage banner
+
+document.addEventListener("DOMContentLoaded", function () {
+  const items = document.querySelectorAll(".itemtxt");
+  const indicatorsContainer = document.querySelector(".indicatorsa");
+  const timeScale = document.querySelector(".time-scale");
+  let currentItem = 0;
+
+  function showNextItem() {
+    const currentItemElem = items[currentItem];
+    currentItemElem.style.display = "block";
+    currentItemElem.style.animation = "fadeInFromRight 1s forwards";
+
+    setTimeout(() => {
+      currentItemElem.style.animation = "fadeOutToRight 1s forwards";
+      setTimeout(() => {
+        currentItemElem.style.display = "none";
+        currentItemElem.style.left = "100%";
+      }, 1000); // Adjust this time based on your fadeOutToRight animation duration
+    }, 6000);
+    currentItem = (currentItem + 1) % items.length;
+    updateIndicators();
+  }
+
+  function updateIndicators() {
+    const indicators = document.querySelectorAll(".indicatora");
+    indicators.forEach((indicator, index) => {
+      indicator.classList.remove("active");
+      if (index === currentItem) {
+        indicator.classList.add("active");
+      }
+    });
+  }
+
+  // Show the first item initially
+  showNextItem();
+
+  // Automatically change the item every 7 seconds (6s visible + 1s fading out)
+  setInterval(showNextItem, 6000);
+});
+
+
+//title timeline
+
+document.addEventListener("DOMContentLoaded", function () {
+  const titles = document.querySelectorAll(".title");
+  const highlightDuration = 6000; // 6 seconds
+  let currentTitle = 0;
+
+  function highlightTitle(index) {
+    titles.forEach((title, i) => {
+      if (i === index) {
+        title.classList.add("active");
+      } else {
+        title.classList.remove("active");
+      }
+    });
+  }
+
+  function showNextTitle() {
+    highlightTitle(currentTitle);
+    currentTitle = (currentTitle + 1) % titles.length;
+  }
+
+  // Highlight the first title immediately on page load
+  highlightTitle(currentTitle);
+
+  // Automatically change the highlighted title every highlightDuration
+  setInterval(showNextTitle, highlightDuration);
+
+  // Run the showNextTitle function initially to set up the sequence
+  showNextTitle();
+});
+
+
+
+
+ /*New Environmnt Factors*/
+
+ $(document).ready(function() {
+  var container = $(".gallery-container1");
+  var items = $(".gallery-item1");
+  var itemWidth = items.first().outerWidth(true);
+  var containerWidth = container.width();
+  var scrollAmount = 0;
+  var numItems = items.length;
+  var numVisibleItems = Math.floor(containerWidth / itemWidth);
+
+  $(".scroll-button.prev").on("click", function() {
+    scrollAmount -= itemWidth * numVisibleItems;
+    scrollAmount = Math.max(scrollAmount, 0);
+    container.animate({ scrollLeft: scrollAmount }, 500);
+    updateIndicators();
+  });
+
+  $(".scroll-button.next").on("click", function() {
+    scrollAmount += itemWidth * numVisibleItems;
+    scrollAmount = Math.min(scrollAmount, itemWidth * (numItems - numVisibleItems));
+    container.animate({ scrollLeft: scrollAmount }, 500);
+    updateIndicators();
+  });
+
+  container.on("scroll", function() {
+    scrollAmount = container.scrollLeft();
+    updateIndicators();
+  });
+
+  $(window).on("resize", function() {
+    containerWidth = container.width();
+    numVisibleItems = Math.floor(containerWidth / itemWidth);
+    scrollAmount = Math.min(scrollAmount, itemWidth * (numItems - numVisibleItems));
+    container.animate({ scrollLeft: scrollAmount }, 0);
+    updateIndicators();
+  });
+
+  function updateIndicators() {
+    var currentIndex = Math.floor(scrollAmount / (itemWidth * numVisibleItems));
+    $(".indicator1").removeClass("active");
+    $(".indicator1").eq(currentIndex).addClass("active");
+  }
+
+  function createIndicators() {
+    $(".indicators1").empty(); // Clear existing indicators
+    var numIndicators = Math.ceil(numItems / numVisibleItems);
+    for (var i = 0; i < numIndicators; i++) {
+      $("<div>")
+        .addClass("indicator1")
+        .appendTo(".indicators1");
+    }
+    updateIndicators();
+  }
+
+  createIndicators();
+});
+
+            </script>
   <!-- FOOTER -->
   <footer class="footer container">
     <span class="footer__copy">
